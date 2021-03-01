@@ -13,7 +13,6 @@ import defaultClasses from '@magento/venia-ui/lib/components/CartPage/cartPage.c
 import { GET_CART_DETAILS } from './cartPage.gql';
 import GiftCardDiscount from '../../GiftCardDiscount'
 
-
 /**
  * Structural page component for the shopping cart.
  * This is the main component used in the `/cart` route in Venia.
@@ -92,12 +91,15 @@ const CartPage = props => {
                 <div className={classes.items_container}>{productListing}</div>
                 <div className={classes.price_adjustments_container}>
                     {priceAdjustments}
-                    <GiftCardDiscount 
-                        refetchCartPage={refetchCartPage} 
-                        giftCardConfig={giftCardConfig} 
-                        isCartUpdating={isCartUpdating}
-                        setIsCartUpdating={setIsCartUpdating}
-                    />
+                    { hasItems ?
+                        <GiftCardDiscount 
+                            refetchCartPage={refetchCartPage} 
+                            giftCardConfig={giftCardConfig} 
+                            isCartUpdating={isCartUpdating}
+                            setIsCartUpdating={setIsCartUpdating}
+                        />
+                        : null
+                    }
                 </div>
                 <div className={classes.summary_container}>
                     <div className={classes.summary_contents}>

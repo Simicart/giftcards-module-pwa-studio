@@ -7,11 +7,13 @@ export const flatten = data => {
     if (shipping_addresses && shipping_addresses[0])
         address = shipping_addresses[0];
 
-    // const shippingMethod = `${
-    //     address.selected_shipping_method.carrier_title
-    // } - ${address.selected_shipping_method.method_title}`;
+    let shippingMethod
 
-    const shippingMethod = ``;
+    if(shipping_addresses.length) {
+        shippingMethod = `${address.selected_shipping_method.carrier_title} - ${address.selected_shipping_method.method_title}`;
+    } else {
+        shippingMethod = ``;
+    }
 
     return {
         city: address.city ? address.city : '',

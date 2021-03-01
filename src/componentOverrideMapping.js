@@ -20,5 +20,9 @@ module.exports = componentOverride = {
 	[`@magento/peregrine/lib/talons/CheckoutPage/useCheckoutPage.js`]: '@giftcard/giftcard/src/components/override/CheckoutPage/useCheckoutPage.js',
 	[`@magento/venia-ui/lib/components/CheckoutPage/PaymentInformation/creditCard.js`]: '@giftcard/giftcard/src/components/override/CheckoutPage/PaymentInformation/creditCard.js',
 	[`@magento/peregrine/lib/talons/CheckoutPage/PaymentInformation/useCreditCard.js`]: '@giftcard/giftcard/src/talons/useCreditCard.js',
-	[`@magento/venia-ui/lib/components/CheckoutPage/PaymentInformation/paymentInformation.js`]: '@giftcard/giftcard/src/components/override/CheckoutPage/PaymentInformation/paymentInformation.js',
+	[`@magento/peregrine/lib/talons/CheckoutPage/OrderConfirmationPage/useOrderConfirmationPage.js`]: '@giftcard/giftcard/src/components/override/CheckoutPage/OrderConfirmationPage/useOrderConfirmationPage.js',
+	[`@magento/venia-ui/lib/components/CheckoutPage/OrderConfirmationPage/orderConfirmationPage.js`]: '@giftcard/giftcard/src/components/override/CheckoutPage/OrderConfirmationPage/orderConfirmationPage.js',
+	[`@magento/peregrine/lib/talons/AccountMenu/useAccountMenuItems`]: '@giftcard/giftcard/src/components/override/AccountMenu/useAccountMenuItems.js',
+	[`@magento/venia-ui/lib/queries/getCategory.graphql`]: '@giftcard/giftcard/src/components/override/queries/getCategory.graphql',
+	[`@magento/venia-ui/lib/components/Gallery/item.js`]: '@giftcard/giftcard/src/components/override/Gallery/item.js'
 };

@@ -9,6 +9,9 @@ import { removeGiftCardCodeFromCart } from '@giftcard/giftcard/src/talons/remove
 import Loading from '../loading.jpg'
 import { useResizeDetector } from 'react-resize-detector'
 
+import { useGiftCardList } from '../../talons/useGiftCardList'
+
+
 const GiftCardDiscount = props => {
     const classes = defaultClasses
     const { 
@@ -56,6 +59,24 @@ const GiftCardDiscount = props => {
         removeCodeData,
         removeCodeErrorMessage
     } = removeGiftCardCodeFromCart()
+
+    const {
+        giftCardListData,
+        giftCardListLoading,
+        derivedErrorMessage
+    } = useGiftCardList()
+
+    let giftCardList = []
+    if(giftCardListData && giftCardListData.mpGiftCardDashboardConfig) {
+        const list = giftCardListData.mpGiftCardDashboardConfig.giftCardLists
+        list.map(({code, balance, status_label}) => {
+            const giftcard = {
+                code: code,
+                balance: balance,
+            }
+            if(status_label === 'Active') giftCardList.push(giftcard)
+        })
+    }
 
     useEffect(() => {
         setIsCartUpdating(true)
@@ -237,8 +258,8 @@ const GiftCardDiscount = props => {
                                     }}
                                 >
                                     <option value='0'>-- Please Select --</option>
-                                    { listGiftCard.map(giftcard => {
-                                        return  <option value={giftcard.code}>{`${giftcard.code} (${giftcard.balance})`}</option>
+                                    { giftCardList.map(({code, balance}) => {
+                                        return  <option value={code}>{`${code} ($${balance})`}</option>
                                     })
 
                                     }

@@ -243,3 +243,16 @@ export const REMOVE_GIFT_CARD_CODE_FROM_CART = gql`
 	}
 ` 
 
+export const GET_GIFT_CARD_LIST = gql`
+	query mpGiftCardDashboardConfig {
+	  	mpGiftCardDashboardConfig {
+		    giftCardLists {
+		      	hidden_code
+		      	balance_formatted
+		      	balance
+		      	code
+		      	status_label
+		    } 	
+	  	}
+	}
+`

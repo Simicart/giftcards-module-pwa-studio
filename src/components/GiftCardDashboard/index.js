@@ -12,12 +12,6 @@ import * as Icon from 'react-feather'
 import { useResizeDetector } from 'react-resize-detector'
 
 const GiftCardDashboard = props => {
-	const {
-		gcDashboardData,
-		gcDashboardLoading,
-		derivedErrorMessage,
-		gcDashboardRefetch
-	} = useGiftCardDashboard()
 	const [gcCode, setGcCode] = useState('')
 	const [isChecked, setIsChecked] = useState(false)
 	const [isCheckCodeMessageDisplayed, setIsCheckCodeMessageDisplayed] = useState(false)
@@ -28,6 +22,13 @@ const GiftCardDashboard = props => {
 	const [activeGCView, setActiveGCView] = useState(999)
 	const [showOverlay, setShowOverlay] = useState(false)
 	const [codesArray, setCodesArray] = useState([])
+
+	const {
+		gcDashboardData,
+		gcDashboardLoading,
+		derivedErrorMessage,
+		gcDashboardRefetch
+	} = useGiftCardDashboard()
 
 	const {
 		checkCode,
@@ -64,7 +65,18 @@ const GiftCardDashboard = props => {
         	gcDashboardRefetch()
         }, 0)
     }, [checkCodeLoading, redeemLoading, addGcLoading, removeGcLoading, saveNotificationsLoading])
- 
+
+	let initialCodesArray = []
+
+    useEffect(() => {
+		setCodesArray(initialCodesArray)
+	}, [gcDashboardLoading])
+
+    const { width: balanceBlockWidth, height: balanceBlockHeigt, ref: balanceBlockRef } = useResizeDetector()
+	const { width: gcListBlockWidth, height: gcListBlockHeight, ref: gcListBlockRef } = useResizeDetector()
+	const { width: transactionsBlockWidth, height: transactionsBlockHeight, ref: transactionsBlockRef } = useResizeDetector()
+	const { width: notificationsBlockWidth, height: notificationsBlockHeight, ref: notificationsBlockRef } = useResizeDetector()
+
 	if(!gcDashboardData || !gcDashboardData.mpGiftCardDashboardConfig) {
 		return <div>Loading</div>
 	}
@@ -77,19 +89,9 @@ const GiftCardDashboard = props => {
 		transactions
 	} = gcDashboardData.mpGiftCardDashboardConfig
 
-	const { width: balanceBlockWidth, height: balanceBlockHeigt, ref: balanceBlockRef } = useResizeDetector()
-	const { width: gcListBlockWidth, height: gcListBlockHeight, ref: gcListBlockRef } = useResizeDetector()
-	const { width: transactionsBlockWidth, height: transactionsBlockHeight, ref: transactionsBlockRef } = useResizeDetector()
-	const { width: notificationsBlockWidth, height: notificationsBlockHeight, ref: notificationsBlockRef } = useResizeDetector()
-
-	let initialCodesArray = []
 	giftCardLists.map(giftcard => {
 		initialCodesArray.push(giftcard['hidden_code'])
 	})
-
-	useEffect(() => {
-		setCodesArray(initialCodesArray)
-	}, [gcDashboardData])
 
 	const onInputChange = (e) => {
 		setGcCode(e.target.value)
@@ -217,7 +219,7 @@ const GiftCardDashboard = props => {
 			{ (!redeemErrorMessage && !addGcLoading) &&
 				<div className={classes['message-success']}>
 					<Icon.Check className={classes['message-icon']}/>
-					{`Gift Card "${gcCode}" redeemed successfully.`}
+					{`Gift Card redeemed successfully.`}
 				</div>
 			}
 			{ (redeemErrorMessage && !addGcLoading) &&
@@ -253,7 +255,7 @@ const GiftCardDashboard = props => {
 			{ (!saveNotificationsError && !saveNotificationsLoading) &&
 				<div className={classes['message-success']}>
 					<Icon.Check className={classes['message-icon']}/>
-					{`Gift Card removemed successfully.`}
+					{`Saved notifications successfully`}
 				</div>
 			}
 			{ (saveNotificationsError && !saveNotificationsLoading) &&
@@ -501,7 +503,7 @@ const GiftCardDashboard = props => {
 				{saveNotiMessage}
 				<div className={classes['giftcard-container']}>
 					<div className={classes['messages']}></div>
-					<div className={classes['block-gift-card']} ref={balanceBlockRef}>
+					<div className={classes['block-gift-card']} >
 						<div className={classes.loading} 
 			                style={{
 			                    display: checkCodeLoading || addGcLoading || redeemLoading ? 'flex' : 'none',

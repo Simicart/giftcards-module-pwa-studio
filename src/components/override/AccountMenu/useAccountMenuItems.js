@@ -47,7 +47,7 @@ export const useAccountMenuItems = props => {
         },
         {
             name: 'My Gift Cards',
-            id: 'accountMenu.myGiftCardsLink',
+            id: 'My Gift Cards',
             url: '/mpgiftcard'
         }
 
