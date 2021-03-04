@@ -1,13 +1,13 @@
-# GiftCards module for Magento PWA Studio
+# Gift Card module for Magento PWA Studio
 
 This module acts as an add-on for [Mageplaza's Gift Card extension](https://www.mageplaza.com/magento-2-gift-card-extension/) to make it work with Magento PWA Studio.
 
-End result: https://giftcards.pwa-commerce.com/
+End result: https://giftcards.pwa-commerce.com/gift-card.html
 
 ## Requirements
 
 - Magento version 2.4.* or >= 2.3.5
-- Got [Mageplaza Gift Card extension](https://www.mageplaza.com/magento-2-gift-card-extension/) and [Product Label GraphQL](https://github.com/mageplaza/magento-2-gift-card-graphql) installed
+- Got [Mageplaza Gift Card extension](https://www.mageplaza.com/magento-2-gift-card-extension/) and [Gift Card GraphQL](https://github.com/mageplaza/magento-2-gift-card-graphql) installed
 
 ## Installation
 
@@ -50,3 +50,7 @@ Modify the dependencies of your project to add Shop By Brand extension.
   yarn add react-resize-detector
   yarn install && yarn watch
 ```
+
+## Contribution
+
+[SimiCart Team](https://www.simicart.com/pwa.html/) & [Mageplaza Team](https://www.mageplaza.com/)
