@@ -38,8 +38,9 @@ Modify the dependencies of your project to add Shop By Brand extension.
 
 ```
   "dependencies": {
-    "@magento/pwa-buildpack": "~7.0.0",
-    "@giftcard/giftcard": "link:./@simicart/giftcards"
+    ...
+    "@giftcard/giftcard": "link:./@simicart/giftcards",
+    ...
   },
 ```
 
