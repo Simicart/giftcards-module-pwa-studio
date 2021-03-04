@@ -102,6 +102,7 @@ const ProductFullDetail = props => {
     const [gcAmount, setGcAmount] = useState(gift_card_amounts ? amounts[0].amount : 0)
     const [activeAmount, setActiveAmount] = useState(0)
     const [activeImage, setActiveImage] = useState(0)
+    const [gcPrice, setGcPrice] = useState(gift_card_amounts ? amounts[0].price : 0)
     const [gcMessage, setGcMessage] = useState('')
     const [gcFrom, setGcFrom] = useState(null)
     const [gcTo, setGcTo] = useState(null)
@@ -123,11 +124,16 @@ const ProductFullDetail = props => {
         else {
             if (value < min_amount) {
                 setGcAmount(min_amount)
+                setGcPrice(min_amount*price_rate/100)
                 e.target.value = min_amount
             } else if (value > max_amount) {
                 e.target.value = max_amount
                 setGcAmount(max_amount)
-            } else setGcAmount(value)
+                setGcPrice(max_amount*price_rate/100)
+            } else {
+                setGcAmount(value)
+                setGcPrice(value*price_rate/100)
+            }
         }
     }
     const onMessageChange = (e) => {
@@ -146,6 +152,8 @@ const ProductFullDetail = props => {
         setPhone(e.target.value)
     }
 
+    console.log(gcAmount)
+
     let giftCardInformationForm;
     if(__typename === 'MpGiftCardProduct') {
         giftCardInformationForm = (
@@ -158,7 +166,7 @@ const ProductFullDetail = props => {
                     <div className={classes['giftcard-field-wrapper']}>
                         <ul className={classes.["giftcard-amount"]}>
                             {  
-                                amounts.map((amount, i) => {
+                                amounts.map(({amount, price}, i) => {
                                     let active = '';
                                     if(activeAmount === i) {
                                         active = classes.active
@@ -167,13 +175,14 @@ const ProductFullDetail = props => {
                                         <li 
                                             className={classes["giftcard-design-button-container"]  + ' ' + active} 
                                             onClick={(e) => {
-                                                setGcAmount(e.target.innerText.substring(1))
+                                                setGcAmount(amount)
+                                                setGcPrice(price)
                                                 setActiveAmount(i)
                                             }}
                                             key={i}
                                         >
                                             <button type="button" className={classes["giftcard-design-button"]} >
-                                                <span >${amount.amount}.00</span>
+                                                <span>${amount}.00</span>
                                             </button>
                                         </li>
                                     )
@@ -387,7 +396,9 @@ const ProductFullDetail = props => {
                     <p className={classes.productPrice}>
                         <Price
                             currencyCode={productDetails.price.currency}
-                            value={productDetails.price.value ? productDetails.price.value : gcAmount*price_rate/100}
+                            value={
+                                productDetails.price.value ? productDetails.price.value : gcPrice
+                            }
                         />
                     </p>
                 </section>

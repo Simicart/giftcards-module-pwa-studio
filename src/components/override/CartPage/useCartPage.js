@@ -51,6 +51,10 @@ export const useCartPage = props => {
         setIsCartUpdating(loading);
     }, [loading]);
 
+    const is_virtual = useMemo(() => {
+        return (data && data.cart.is_virtual) || false;
+    }, [data]);
+
     const hasItems = !!(data && data.cart.total_quantity);
     const shouldShowLoadingIndicator = called && loading && !hasItems;
 
@@ -71,7 +75,8 @@ export const useCartPage = props => {
         setIsCartUpdating,
         shouldShowLoadingIndicator,
         refetchCartPage,
-        giftCardConfig
+        giftCardConfig,
+        is_virtual
     };
 };
 

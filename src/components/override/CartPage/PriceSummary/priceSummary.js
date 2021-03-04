@@ -37,7 +37,7 @@ const GET_PRICE_SUMMARY = gql`
  * import PriceSummary from "@magento/venia-ui/lib/components/CartPage/PriceSummary";
  */
 const PriceSummary = props => {
-    const { isUpdating } = props;
+    const { isUpdating, is_virtual } = props;
     const classes = mergeClasses(defaultClasses, props.classes);
     const talonProps = usePriceSummary({
         queries: {
@@ -142,14 +142,16 @@ const PriceSummary = props => {
                     data={taxes}
                     isCheckout={isCheckout}
                 />
-                <ShippingSummary
-                    classes={{
-                        lineItemLabel: classes.lineItemLabel,
-                        price: priceClass
-                    }}
-                    data={shipping}
-                    isCheckout={isCheckout}
-                />
+                { !is_virtual &&
+                    <ShippingSummary
+                        classes={{
+                            lineItemLabel: classes.lineItemLabel,
+                            price: priceClass
+                        }}
+                        data={shipping}
+                        isCheckout={isCheckout}
+                    />
+                }
                 {MpGiftCardSummary}
                 {MpGiftCreditSummary}
                 <span className={classes.totalLabel}>

@@ -10,6 +10,8 @@ import { SAVE_NOTIFICATIONS } from '@giftcard/giftcard/src/talons/GiftCard.gql'
 import Loading from '../loading.jpg'
 import * as Icon from 'react-feather'
 import { useResizeDetector } from 'react-resize-detector'
+import { Title } from '@magento/venia-ui/lib/components/Head'
+import { Price } from '@magento/peregrine';
 
 const GiftCardDashboard = props => {
 	const [gcCode, setGcCode] = useState('')
@@ -196,6 +198,8 @@ const GiftCardDashboard = props => {
 		: null
 	)
 
+	console.log(checkCodeData)
+
 	const addGcMessage = ( !addGcLoading ?
 		<div className={classes['message-container']} style={{maxHeight: isAddGcMsgDisplayed ? '200px' : '0px'}}>
 			{ (!addGcErrorMessage && !addGcLoading) &&
@@ -269,43 +273,44 @@ const GiftCardDashboard = props => {
 	)
 
 	const currentBalanceBlock = (
-		<Fragment>
-			<div className={classes['block-content']}> 
-				<div className={classes['box-information']}>
-					<div className={classes['box-title']}><strong>My current balance</strong></div>
-					<div className={classes['box-content']}>{balance}</div>
-				</div>
-				<div className={classes['box-information']}>
-					<div className={classes['box-title']}><strong>Check/Redeem Gift Card</strong><br/></div>
-					<div className={`${classes.control} fas fa-gift`}>
-						<input className={classes['check-code-field']} value={gcCode} onChange={onInputChange}/>
-					</div>
-					<div className={classes['action-buttons']}>
-						{ (isChecked && checkCodeData && checkCodeData.mpGiftCardCheckCode.status_label === "Active") ?
-							<Fragment>
-								<button 
-									className={classes['action-button']} 
-									type='button'
-									onClick={() => handleRedeemGiftCard(gcCode)}
-								>Redeem</button>
-								<button 
-									className={classes['action-button']} 
-									type='button'
-									onClick={handleAddGiftCard}
-								>Add to list</button>
-							</Fragment>
-							: 
-							<button 
-								className={classes['action-button']} 
-								type='button' 
-								onClick={onCheckCodeClick}
-							>Check</button>
-						}
-					</div>
-					{checkCodeMessage}
+		<div className={classes['block-content']} ref={balanceBlockRef}> 
+			<div className={classes['box-information']}>
+				<div className={classes['box-title']}><strong>My current balance</strong></div>
+				<div className={classes['box-content']}>
+					<Price currencyCode='USD' value={balance}/>
 				</div>
 			</div>
-		</Fragment>
+			<div className={classes['box-information']}>
+				<div className={classes['box-title']}><strong>Check/Redeem Gift Card</strong><br/></div>
+				<div className={classes['gift-code-input-field']}>
+					<Icon.Gift className={classes['gift-icon']}/>
+					<input className={classes['check-code-field']} value={gcCode} onChange={onInputChange}/>
+				</div>
+				<div className={classes['action-buttons']}>
+					{ (isChecked && checkCodeData && checkCodeData.mpGiftCardCheckCode.status_label === "Active") ?
+						<Fragment>
+							<button 
+								className={classes['action-button']} 
+								type='button'
+								onClick={() => handleRedeemGiftCard(gcCode)}
+							>Redeem</button>
+							<button 
+								className={classes['action-button']} 
+								type='button'
+								onClick={handleAddGiftCard}
+							>Add to list</button>
+						</Fragment>
+						: 
+						<button 
+							className={classes['action-button']} 
+							type='button' 
+							onClick={onCheckCodeClick}
+						>Check</button>
+					}
+				</div>
+				{checkCodeMessage}
+			</div>
+		</div>
 	)
 
 	const cardListTableRows = giftCardLists.map((giftcard, i) => {
@@ -491,9 +496,8 @@ const GiftCardDashboard = props => {
 
 	return (
 		<Fragment>
+			<Title>{`My Gift Cards - ${STORE_NAME}`}</Title>
 			<div style={{width: '70%', margin: 'auto', outline: 'none', marginTop: '20px'}} tabIndex='0' onKeyDown={handleEscGCView}>
-				<link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"/>
-				
 				<div className={classes['page-title-wrapper']}>
 					<h1 class={classes['page-title']}>My Gift Cards</h1>
 				</div>

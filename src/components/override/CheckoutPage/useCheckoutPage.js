@@ -104,10 +104,6 @@ export const useCheckoutPage = props => {
                     break;
                 }
             }
-            // giftcard_options.map(({code, value}) => {
-            //     is_virtual = (code === "delivery_method" && value === "4") ? false : true
-            //     break;
-            // })
         }
     })
 

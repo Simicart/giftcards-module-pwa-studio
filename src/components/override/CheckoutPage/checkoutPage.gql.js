@@ -26,6 +26,7 @@ export const GET_ORDER_DETAILS = gql`
     query getOrderDetails($cartId: String!) {
         cart(cart_id: $cartId) {
             id
+            is_virtual
             ...OrderConfirmationPageFragment
         }
     }

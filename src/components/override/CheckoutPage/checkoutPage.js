@@ -160,7 +160,7 @@ const CheckoutPage = props => {
         const priceAdjustmentsSection =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
                 <div className={classes.price_adjustments_container}>
-                    <PriceAdjustments setPageIsUpdating={setIsUpdating} />
+                    <PriceAdjustments setPageIsUpdating={setIsUpdating}/>
                 </div>
             ) : null;
 
@@ -204,7 +204,7 @@ const CheckoutPage = props => {
 
         const orderSummary = shouldRenderPriceSummary ? (
             <div className={classes.summaryContainer}>
-                <OrderSummary isUpdating={isUpdating} />
+                <OrderSummary isUpdating={isUpdating} is_virtual={is_virtual}/>
             </div>
         ) : null;
 

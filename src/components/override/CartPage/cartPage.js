@@ -46,7 +46,8 @@ const CartPage = props => {
         setIsCartUpdating,
         shouldShowLoadingIndicator,
         refetchCartPage,
-        giftCardConfig
+        giftCardConfig,
+        is_virtual
     } = talonProps;
 
     const classes = mergeClasses(defaultClasses, props.classes);
@@ -71,10 +72,10 @@ const CartPage = props => {
     );
 
     const priceAdjustments = hasItems ? (
-        <PriceAdjustments setIsCartUpdating={setIsCartUpdating} />
+        <PriceAdjustments setIsCartUpdating={setIsCartUpdating} is_virtual={is_virtual}/>
     ) : null;
     const priceSummary = hasItems ? (
-        <PriceSummary isUpdating={isCartUpdating} />
+        <PriceSummary isUpdating={isCartUpdating} is_virtual={is_virtual}/>
     ) : null;
 
     return (

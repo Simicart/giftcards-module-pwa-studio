@@ -15,6 +15,8 @@ export const flatten = data => {
         shippingMethod = ``;
     }
 
+    console.log(cart)
+
     return {
         city: address.city ? address.city : '',
         country: (address && address.country && address.country.label) ? address.country.label : '',

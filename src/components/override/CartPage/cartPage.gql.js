@@ -24,6 +24,7 @@ export const GET_CART_DETAILS = gql`
     query getCartDetails($cartId: String!) {
         cart(cart_id: $cartId) {
             id
+            is_virtual
             ...CartPageFragment
             ...GiftCardConfigFragment
         }
