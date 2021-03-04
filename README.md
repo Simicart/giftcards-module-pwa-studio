@@ -30,7 +30,7 @@ From the root directory of the project you created above, clone the repository:
 Change the .env MAGENTO_BACKEND_URL with your Magento site URL, or use our demo URL:
 
 ```
-  MAGENTO_BACKEND_URL=https://mpmed.pwa-commerce.com/
+  MAGENTO_BACKEND_URL=https://mp.pwa-commerce.com/
 ```
 ### 4. Modify package.json
 
