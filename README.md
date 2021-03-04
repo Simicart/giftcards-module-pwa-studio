@@ -13,7 +13,7 @@ End result: https://giftcards.pwa-commerce.com/
 
 ### 1. Init project
 ```
-https://github.com/Simicart/simi-studio
+git clone https://github.com/Simicart/simi-studio simi-studio
 cd simi-studio
 ```
 
